@@ -1,5 +1,5 @@
 import express from "express";
-const router =express.Router()
+const userRouter =express.Router()
 
 import { 
     handleUserget,
@@ -8,7 +8,7 @@ import {
     handleUserPatch 
 } from '../controllers/controllers.user.js'
 
-router.route('/')
+userRouter.route('/')
 .get(handleUserget)
 .post(handleUserPost)
 .patch(handleUserPatch)
@@ -16,5 +16,5 @@ router.route('/')
 
 
 export {
-    router
+    userRouter
 }
