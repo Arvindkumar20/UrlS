@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>url shortner</title>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        }
+        span{
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+    <!-- //write ejs code -->
+     <h1>Url Shortner</h1>
+
+     <% if (locals.shortId) { %>
+        <h3>Url Generated : http://localhost:3000/url<%= locals.shortId %></h3>
+
+      
+     <% } %>
+     <form method="POST" action="url">
+        <label for="redirectUrl"> enter your original url </label>
+        <br>
+        <input type="text" name="url" placeholder="www.Example.com">
+        <button type="submit">Submit</button>
+     </form>
+   <% if (locals.urls) { %>
+    <table>
+        <thead>
+<tr> 
+    <th>S No</th>
+    <th>ShortId</th>
+    <th> Redirect Url</th>
+    <th>Total Clicks</th>
+    <th>Delete</th>
+</tr>
+        </thead>
+        <tbody>
+
+    <% urls.forEach((url,index) => { %>
+
+        <tr>
+            <td><%= index + 1 %></td>
+<td> <%= url.shortId%> </td>
+<td><%= url.redirectUrl%> </td>
+<td><%= url.visitHistory.length%></td>
+<td key = <%= url._id%> ><button>Delete</button></td>
+        </tr>
+     
+    <% }) %>   
+
+        </tbody>
+    </table>
+ 
+      
+   <% } %>
+</body>
+</html>

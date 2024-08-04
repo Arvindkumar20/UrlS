@@ -8,10 +8,7 @@ const handleUrlget=async(req,res)=>{
         return res.status(404).json({message:"No urls found"})
     }
     res.json(urls )
-
 }
-
-
 const handleUrlPost=async(req,res)=>{
     const url=req.body
     if(!url.url){
@@ -23,11 +20,10 @@ const handleUrlPost=async(req,res)=>{
         redirectUrl:url.url,
         visitHistory:[]
     })
-    return res.status(200).json({
+     return res.render("home",{
         shortId:shortId,
-        redirectUrl:url.url,
-        visitHistory:[],
-        })
+        urls:await urlModel.find({})
+     })
         }
         // const handleUrlPut=(req,res)=>{
         //     const {click}=req.body  
@@ -44,12 +40,10 @@ const handleUrlPost=async(req,res)=>{
                 if(!url){
                     return res.status(404).json({message:"No url found"})
                     }
-
                  return res.json({
                     message:'url deleted'
                     })
                     }
-
                     const handleUrlGetShortId=async(req,res)=>{
                         const shortId=req.params.shortId
                         const entry=await urlModel.findOneAndUpdate({shortId},{
