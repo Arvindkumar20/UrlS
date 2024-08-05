@@ -1,4 +1,6 @@
 import { UserModel } from "../models/models.user.js"
+import { setUser } from "../service/auth.js";
+import { v4 as uuidv4 } from 'uuid';
 const handleUserget=async(req,res)=>{
     const users=await UserModel.find({})
     if(!users){
@@ -39,6 +41,9 @@ const handleUserSignUp=async(req,res)=>{
             message:"invalid email or password"
         })
     }
+    const sessionId=uuidv4();
+setUser(sessionId,user);
+res.cookie("uid",sessionId)
 return res.redirect('/');
 }
     const handleUserPatch=async(req,res)=>{
