@@ -1,39 +1,87 @@
-const handleUserget=(req,res)=>{
-res.json({
-    name:"arvind",
-    age:21,
-    gender:"male"
-})
-}
-const handleUserPost=(req,res)=>{
-    res.json({
-        name:"arvind",
-        age:21,
-        gender:"male",
-        message:"create successfully"
-    })
+import { UserModel } from "../models/models.user.js"
+const handleUserget=async(req,res)=>{
+    const users=await UserModel.find({})
+    if(!users){
+        return res.json({
+            message:"No users found",
+            status:404
+
+        })
+
     }
-    const handleUserPatch=(req,res)=>{
-        
-        res.json({
-            name:"arvind",
-            age:21,
-            gender:"male",
+res.json(users)
+}
+
+const handleUserSignUp=async(req,res)=>{
+    const user=req.body
+   
+    if(!user){
+        return res.status(400).json({
+            message:"No user provided",
+            status:400
+            })
+
+    }
+    const us=await  UserModel.create({
+        name:user.name,
+        email:user.email,
+        password:user.password,
+
+    })
+   return res.redirect('/');
+
+    }
+    const handleUserLogin=async(req,res)=>{
+        const {email,password}=req.body
+        const user=await UserModel.findOne({email,password})
+    if(!user){
+        return res.render('login',{
+            message:"invalid email or password"
+        })
+    }
+return res.redirect('/');
+}
+    const handleUserPatch=async(req,res)=>{
+        const user=req.body
+        const {_id}=req.params
+        if(!_id || !user){
+            return res.status(400).json({
+                message:"id and user are equired"})
+        }
+        await UserModel.findOneAndUpdate({_id},{
+            name:user.name,
+            email:user.email,
+            password:user.password,
+
+        })
+       return  res.json({
+           
             message:"update successfully"
         })
         }
-        const handleUserDelete=(req,res)=>{
-            res.json({
-                name:"arvind",
-                age:21,
-                gender:"male",
+        const handleUserDelete=async(req,res)=>{
+            const {_id}=req.params
+            if(!_id){
+                return res.status(400).json({
+                    message:"id is required"
+                    })
+                    }
+
+                    await UserModel.findOneAndDelete({_id})
+
+
+
+           return res.json({
+               
                 message:"deleted successfully"
             })
             }
+        
 
 export {
     handleUserget,
-    handleUserPost,
+    handleUserLogin,
+    handleUserSignUp,
     handleUserPatch,
     handleUserDelete,
 
