@@ -26,7 +26,7 @@ app.use('/user',userRouter);
 app.use('/url',ristrictLoggedInUserOnly,urlRouter);
 app.use('/',staticRouter);
 
-app.post('/url/:id',async(req,res)=>{
+app.delete('/url/:id',async(req,res)=>{
         const id=req.params.id
        const url=await urlModel.findOneAndDelete(id);
        console.log(url)
