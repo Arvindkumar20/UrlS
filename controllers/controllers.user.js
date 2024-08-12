@@ -7,9 +7,7 @@ const handleUserget=async(req,res)=>{
         return res.json({
             message:"No users found",
             status:404
-
         })
-
     }
 res.json(users)
 }
@@ -28,10 +26,8 @@ const handleUserSignUp=async(req,res)=>{
         name:user.name,
         email:user.email,
         password:user.password,
-
     })
    return res.redirect('/');
-
     }
     const handleUserLogin=async(req,res)=>{
         const {email,password}=req.body

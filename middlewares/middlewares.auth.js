@@ -1,7 +1,6 @@
 import { getUser } from "../service/auth.js";
 export const ristrictLoggedInUserOnly=async(req,res,next)=>{
     const userUid=req.cookies?.uid;
-    console.log(userUid)
     if(!userUid){
         return res.redirect('/login');
 

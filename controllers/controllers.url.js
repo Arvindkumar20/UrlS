@@ -1,5 +1,6 @@
 // import express from "express";
 import {urlModel} from '../models/models.url.js'
+
 import shortid from "shortid"
 
 const handleUrlget=async(req,res)=>{
@@ -25,16 +26,7 @@ const handleUrlPost=async(req,res)=>{
         urls:await urlModel.find({})
      })
         }
-        // const handleUrlPut=(req,res)=>{
-        //     const {click}=req.body  
-        //     res.json({
-        //         url:req.body.url,
-        //         shortUrl:req.body.shortUrl,
-        //         click:click,
-        //         date:req.body.date
-        //         })
-        //     }
-            const handleUrlDelete=async(req,res)=>{
+                    const handleUrlDelete=async(req,res)=>{
                 const {id}=req.params
                 const url=await urlModel.findByIdAndDelete(id)
                 if(!url){

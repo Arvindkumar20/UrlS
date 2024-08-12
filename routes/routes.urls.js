@@ -12,7 +12,8 @@ urlRouter.route('/')
 .get(handleUrlget)
 .post(handleUrlPost)
 // .patch(handleUrlDelete)
-urlRouter.delete('/:id',handleUrlDelete)
+
+// urlRouter.delete('/:id',handleUrlDelete)
 urlRouter.get('/:shortId',handleUrlGetShortId)
 urlRouter.get('/analytics/:shortId',handleUrlGetAnalitics)
 

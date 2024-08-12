@@ -8,10 +8,85 @@
         body {
         font-family: Arial, sans-serif;
         }
+        h1{
+            text-align: center;
+            color: rgb(91, 8, 170);
+            padding: 5px;
+
+        }
+        h3{
+            text-align: center;
+            color: green;
+                    }
         span{
             font-weight: 300;
         }
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(9, 70, 238);
+            color: white;
+            width: 46%;
+            padding: 50px 0;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+        label{
+            font-weight: bold;
+            padding: 5px;
+            font-size: 1.6rem;
+        }
+        input{
+            width: 86%;
+            padding:12px 3px;
+            border: none;
+            outline: none;
+            font-weight: 500;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            border-radius: 10px;
+            font-size: 1rem;
+
+        }
+        .input-box{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding:2px 5px;
+            width: 80%;
+            border: none;
+            border-radius: 20px;
+            background: white;
+        }
+        button{
+            border: none;
+            outline: none;
+            background: white;
+        }
+        img{
+            width: 25px;
+            cursor: pointer;
+        }
+        table{
+            border: 2px solid rgb(182, 182, 180);
+            background: #cdcaca;
+            color: rgb(19, 6, 6);
+            margin: 5% auto;
+            padding: 5px 5px;
+            border-radius: 20px;
+        }
+        th, td{
+            padding: 10px;
+            border: 0.5px solid rgb(248, 248, 246);
+        }
+        .Delete{
+            background-color: #ff0000;
+          font-size: 1rem;
+          cursor: pointer;
+        }
     </style>
+
 </head>
 <body>
     <!-- //write ejs code -->
@@ -24,10 +99,12 @@
       
      <% } %>
      <form method="POST" action="url">
-        <label for="redirectUrl"> enter your original url </label>
+        <label for="redirectUrl"> Enter Your Original Url </label>
         <br>
-        <input type="text" name="url" placeholder="www.Example.com">
-        <button type="submit">Submit</button>
+        <div class="input-box">
+            <input type="search" name="url" placeholder="www.Example.com">
+        <button type="submit"><img src="https://openclipart.org/image/2400px/svg_to_png/213239/Search-icon.png" alt="search"></button>
+        </div>
      </form>
    <% if (locals.urls) { %>
     <table>
@@ -37,7 +114,7 @@
     <th>ShortId</th>
     <th> Redirect Url</th>
     <th>Total Clicks</th>
-    <th>Delete</th>
+    <th >Delete</th>
 </tr>
         </thead>
         <tbody>
@@ -49,7 +126,11 @@
 <td> <%= url.shortId%> </td>
 <td><%= url.redirectUrl%> </td>
 <td><%= url.visitHistory.length%></td>
-<td key = <%= url._id%> ><button>Delete</button></td>
+<td key = <%= url._id%> class="Delete">
+    <form action="/url/<%= url._id%>"
+    method="post" > 
+    <button type="submit" class="Delete">Delete</button>
+    </form></td>
         </tr>
      
     <% }) %>   
