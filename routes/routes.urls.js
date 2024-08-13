@@ -13,7 +13,7 @@ urlRouter.route('/')
 .post(handleUrlPost)
 // .patch(handleUrlDelete)
 
-// urlRouter.delete('/:id',handleUrlDelete)
+urlRouter.post('/:id',handleUrlDelete)
 urlRouter.get('/:shortId',handleUrlGetShortId)
 urlRouter.get('/analytics/:shortId',handleUrlGetAnalitics)
 

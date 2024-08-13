@@ -15,3 +15,10 @@ export const ristrictLoggedInUserOnly=async(req,res,next)=>{
     next();
 
 }
+export const checkAuth=async(req,res,next)=>{
+    const userUid=req.cookies?.uid;
+    const user=await getUser(userUid);
+    req.user=user;
+    next();
+
+}

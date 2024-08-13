@@ -1,7 +1,10 @@
 import { urlModel } from "../models/models.url.js";
 import { UserModel } from "../models/models.user.js";
  const routeUserHome=async(req,res)=>{
-        const urls=await urlModel.find({})
+    if(!req.user){
+        return res.redirect('/login');
+    }
+        const urls=await urlModel.find({createdBy:req.user._id});
         return res.render('home',{
                 urls:urls
         })

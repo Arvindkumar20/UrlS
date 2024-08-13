@@ -19,22 +19,23 @@ const handleUrlPost=async(req,res)=>{
     await urlModel.create({
         shortId:shortId,
         redirectUrl:url.url,
-        visitHistory:[]
+        visitHistory:[],
+        createdBy:req.user._id
     })
      return res.render("home",{
         shortId:shortId,
-        urls:await urlModel.find({})
+        urls:await urlModel.find({createdBy:req.user._id})
      })
         }
                     const handleUrlDelete=async(req,res)=>{
                 const {id}=req.params
                 const url=await urlModel.findByIdAndDelete(id)
-                if(!url){
-                    return res.status(404).json({message:"No url found"})
-                    }
-                 return res.json({
-                    message:'url deleted'
-                    })
+                      if(!url){
+                 return res.status(404).json({message:"url not found"})
+         
+                }
+         
+                return res.render("home",{urls:await urlModel.find({createdBy:req.user._id})}) 
                     }
                     const handleUrlGetShortId=async(req,res)=>{
                         const shortId=req.params.shortId
